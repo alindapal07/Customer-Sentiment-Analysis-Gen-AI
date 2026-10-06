@@ -59,75 +59,8 @@ Create a `.env` file in the root directory. Use `.env.example` as a template for
    cd Customer-Sentiment-Analysis-Gen-AI
 Initialize a virtual environment:
 
-Bash
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-Install dependencies:
 
-Bash
-pip install --upgrade pip
-pip install -r requirements.txt
-Run the application:
-
-Bash
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-Docker Setup (Production Recommended)
-Build the Docker image:
-
-Bash
-docker build -t sentiment-analysis-engine .
-Run the container:
-
-Bash
-docker run -d -p 8000:8000 --env-file .env sentiment-analysis-engine
-API Documentation
-Once the server is running, the interactive OpenAPI (Swagger) UI is automatically generated and available at http://localhost:8000/docs.
-
-Endpoint: Analyze Sentiment
-POST /api/v1/analyze
-
-Request Payload:
-
-JSON
-{
-  "text": "The integration was seamless, but customer support took three days to respond to a critical billing issue.",
-  "source_id": "ticket_99482",
-  "domain": "SaaS"
-}
-Response Payload:
-
-JSON
-{
-  "status": "success",
-  "data": {
-    "source_id": "ticket_99482",
-    "overall_sentiment": "Mixed",
-    "sentiment_score": -0.3,
-    "primary_emotion": "Frustrated",
-    "urgency_level": "High",
-    "key_extracts": [
-      "seamless integration",
-      "three days to respond",
-      "critical billing issue"
-    ],
-    "actionable_insight": "Escalate billing support protocols to prevent SLA breaches."
-  },
-  "processing_time_ms": 412
-}
-
-
-Contributing
-Fork the repository.
-
-Create a feature branch (git checkout -b feature/model-optimization).
-
-Commit your changes (git commit -m 'feat: implement dynamic context windows').
-
-Push to the branch (git push origin feature/model-optimization).
-
-Open a Pull Request ensuring all tests pass, typing is strictly maintained, and relevant documentation is updated.
-
-Author
+##Author
 Alinda Pal
 
 Full-Stack Software Engineer
