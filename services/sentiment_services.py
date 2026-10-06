@@ -6,7 +6,7 @@ async def analyze_sentiment(
     request: ClientRequest,
 ) -> SentimentResponse:
 
-    prompt = f"""
+   prompt = f"""
 You are a customer sentiment analysis AI.
 
 Analyze the following customer message carefully.
@@ -53,9 +53,14 @@ Rules:
 - Be objective.
 - Return the result according to the provided response schema.
 """
+   result=""
+   #  result = await OllamaClient.analyze_sentiment(prompt=prompt)
+   #  result = SentimentResponse.model_validate_json(result)
+   #  result.customer_id = request.customer_id
+   
+   async for chunk in OllamaClient.analyze_sentiment(prompt):
+      result+=chunk
+   response=SentimentResponse.model_validate_json(result)
+   response.customer_id = request.customer_id  
 
-    result = await OllamaClient.analyze_sentiment(prompt=prompt)
-    result = SentimentResponse.model_validate_json(result)
-    result.customer_id = request.customer_id
-
-    return result
+   return response

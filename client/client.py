@@ -22,12 +22,12 @@ class OllamaClient:
             options={
                 "temperature": 0,
             },
+            stream=True,
         )
 
-        if not response.message.content:
-            raise ValueError("Ollama returned an empty response.")
-
-        return response.message.content
+        async for chunk in response:
+            if chunk.message.content:
+                yield chunk.message.content
 
 
 OllamaClient = OllamaClient()
